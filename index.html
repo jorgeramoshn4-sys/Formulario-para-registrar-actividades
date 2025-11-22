@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario de Registro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 350px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #registros {
+      width: 350px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .registro {
+      border-bottom: 1px solid #ccc;
+      padding: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <form id="registroForm">
+    <h2>Registro de Actividad</h2>
+    
+    <label for="nombre">Nombre completo:</label>
+    <input type="text" id="nombre" name="nombre" required>
+    
+    <label for="identidad">Identidad:</label>
+    <input type="text" id="identidad" name="identidad" required>
+    
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha" name="fecha" required>
+    
+    <label for="hora">Hora de entrada:</label>
+    <input type="time" id="hora" name="hora" required>
+    
+    <label for="actividad">Registro de actividad a realizar:</label>
+    <textarea id="actividad" name="actividad" rows="4" required></textarea>
+    
+    <button type="submit">Registrar</button>
+  </form>
+
+  <div id="registros">
+    <h3>Datos registrados:</h3>
+    <div id="listaRegistros"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('registroForm');
+    const lista = document.getElementById('listaRegistros');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // evita recargar la página
+
+      // Capturar valores
+      const nombre = document.getElementById('nombre').value;
+      const identidad = document.getElementById('identidad').value;
+      const fecha = document.getElementById('fecha').value;
+      const hora = document.getElementById('hora').value;
+      const actividad = document.getElementById('actividad').value;
+
+      // Crear un bloque de registro
+      const registro = document.createElement('div');
+      registro.classList.add('registro');
+      registro.innerHTML = `
+        <strong>${nombre}</strong> (ID: ${identidad})<br>
+        Fecha: ${fecha} - Hora: ${hora}<br>
+        Actividad: ${actividad}
+      `;
+
+      // Añadir al listado
+      lista.appendChild(registro);
+
+      // Limpiar formulario
+      form.reset();
+    });
+  </script>
+</body>
+</html>
